@@ -18,12 +18,11 @@ use the following code.
 
 ```
 var express = require('express');
-
+var app = express();
 /* Express options code */
 ...
 
 /* Setup your routes */
-
 var router = require('express-quick-routes').init();
 app.get('/auth/google', router.auth.googleAuth);
 app.get('/auth/googleCallback', router.auth.googleCallback);
@@ -32,7 +31,7 @@ app.get('/logout', router.index.logout);
 
 
 /* Start listening */
-server.listen(3000);
+app.listen(3000);
 ```
 
 It's some what difficult for me to explain exactly how to use it, hopefully that was helpful. But the bottom line is
