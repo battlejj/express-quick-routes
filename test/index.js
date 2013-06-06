@@ -6,6 +6,7 @@ describe('testing route loading', function(){
 
   it('should load the router with the available functions in the files contained in the routes folder', function(done){
     var router = require('../index.js').init("./test/routes");
+    var router2 = require('../index.js').init("./test/routes2")
 
     if(!router.admin || !(typeof router.admin.index === 'function') || !(typeof router.admin.test === 'function')){
       throw "Admin routes not found. Failed test.";
@@ -15,6 +16,10 @@ describe('testing route loading', function(){
       throw "Main routes not found. Failed test.";
     }
 
+    if(!router2.blog || !(typeof router2.blog.index === 'function') || !(typeof router2.blog.post === 'function')){
+      throw "Blog routes not found. Failed test.";
+    }
+    
     done();
   });
 
