@@ -3,8 +3,13 @@ var router = {
     var fs = require('fs')
       , path = require('path')
       , sugar = require('sugar')
-      , routeFolder = routesLocation ? path.resolve(routesLocation) : path.dirname(process.mainModule.filename + '/routes/')
-      , router = {};
+      , router = {}
+      , routeFolder = '';
+    if(routesLocation){
+      routeFolder = path.resolve(routesLocation);
+    } else {
+      routeFolder = path.resolve(path.dirname(process.mainModule.filename) + '/routes/');
+    }
 
     fs.readdirSync(routeFolder).forEach(function(file){
       var keyName = '';
