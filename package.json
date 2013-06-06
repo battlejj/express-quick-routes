@@ -1,0 +1,27 @@
+{
+  "name": "express-quick-routes",
+  "version": "0.0.0",
+  "description": "A quick and easy way to include all your Express routes.",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/battlejj/express-quick-routes"
+  },
+  "dependencies": {
+    "sugar": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "express",
+    "router",
+    "quick-routes"
+  ],
+  "author": "Jeremy Battle"
+}
