@@ -1,25 +1,39 @@
 var should = require('should')
+  , mocha = require('mocha')
   , expect = require('chai').expect;
 
+var quickRoutes = require('../index.js');
 
-describe('testing route loading', function(){
+describe('test router generation', function(){
 
-  it('should load the router with the available functions in the files contained in the routes folder', function(done){
-    var router = require('../index.js').init("./test/routes");
-    var router2 = require('../index.js').init("./test/routes2")
+  it('should load a router object structure matching that of routes/app', function(done){
+    var router = quickRoutes('./test/routes/app');
+    expect(router).to.contain.keys('auth', 'home');
+    expect(router.auth).to.contain.keys('index', 'register');
+    expect(router.auth.index).to.contain.keys('signin', 'signout');
+    expect(router.auth.index.signin).to.be.a('function');
+    expect(router.auth.index.signout).to.be.a('function');
+    expect(router.auth.register).to.contain.keys('index');
+    expect(router.auth.register.index).to.be.a('function');
+    expect(router.home).to.contain.keys('index');
+    expect(router.home.index).to.contain.keys('index', 'contact');
+    expect(router.home.index.index).to.be.a('function');
+    expect(router.home.index.contact).to.be.a('function');
 
-    if(!router.admin || !(typeof router.admin.index === 'function') || !(typeof router.admin.test === 'function')){
-      throw "Admin routes not found. Failed test.";
-    }
+    done();
+  })
 
-    if(!router.index || !(typeof router.index.index === 'function')){
-      throw "Main routes not found. Failed test.";
-    }
-
-    if(!router2.blog || !(typeof router2.blog.index === 'function') || !(typeof router2.blog.post === 'function')){
-      throw "Blog routes not found. Failed test.";
-    }
-    
+  it('should load a router object structure matching that of routes/www', function(done){
+    var router = quickRoutes('./test/routes/www');
+    expect(router).to.contain.keys('dashboard', 'index');
+    expect(router.dashboard).to.contain.keys('index');
+    expect(router.dashboard.index).to.contain.keys('index');
+    expect(router.dashboard.index.index).to.be.a('function');
+    expect(router.index).to.contain.keys('about', 'home');
+    expect(router.index.about).to.contain.keys('index');
+    expect(router.index.about.index).to.be.a('function');
+    expect(router.index.home).to.contain.keys('index');
+    expect(router.index.home.index).to.be.a('function');
     done();
   });
 
